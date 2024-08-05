@@ -1,0 +1,77 @@
+library ieee;				
+use ieee.std_logic_1164.all;
+use work.all;
+
+entity somador is
+port(	
+	-- inputs
+		INIT : in std_logic;
+		MR3 : in std_logic;
+		MR2 : in std_logic;
+		MR1 : in std_logic;
+		MR0 : in std_logic;
+		CLK: in std_logic;
+		
+		-- states inputs
+		q0 : in std_logic;
+		q1 : in std_logic;
+		q2 : in std_logic;
+		q3 : in std_logic;
+		
+		-- outputs
+		MDLD : out std_logic;
+		MRLD : out std_logic;
+		SCLOAD : out std_logic;
+		SCCLEAR : out std_logic;
+		SCSHR : out std_logic;
+		
+		-- states future inputs
+		qf0 : out std_logic;
+		qf1 : out std_logic;
+		qf2 : out std_logic;
+		qf3 : out std_logic	
+);
+end somador;
+
+architecture struct of somador is
+
+    component control_block is
+    port(   
+		-- inputs
+		INIT : in std_logic;
+		MR3 : in std_logic;
+		MR2 : in std_logic;
+		MR1 : in std_logic;
+		MR0 : in std_logic;
+		CLK: in std_logic;
+		
+		-- states inputs
+		q0 : in std_logic;
+		q1 : in std_logic;
+		q2 : in std_logic;
+		q3 : in std_logic;
+		
+		-- outputs
+		MDLD : out std_logic;
+		MRLD : out std_logic;
+		SCLOAD : out std_logic;
+		SCCLEAR : out std_logic;
+		SCSHR : out std_logic;
+		
+		-- states future inputs
+		qf0 : out std_logic;
+		qf1 : out std_logic;
+		qf2 : out std_logic;
+		qf3 : out std_logic	
+    );
+    end component;
+
+    signal wire: std_logic;		-- signal just like wire
+
+begin
+
+    -- use sign "=>" to clarify the pin mapping
+
+    -- Gate1: AND_GATE port map (A=>input1, B=>input2, F1=>wire);
+
+end struct;

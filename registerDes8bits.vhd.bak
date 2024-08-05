@@ -1,0 +1,39 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+entity shift_register_8bit is
+    Port (
+        clk     : in  std_logic;                -- Clock
+        reset   : in  std_logic;                -- Reset assíncrono
+        load    : in  std_logic;                -- Sinal de controle para carregar novo valor
+        shift_left : in std_logic;              -- Sinal de controle para deslocamento à esquerda
+        shift_right : in std_logic;             -- Sinal de controle para deslocamento à direita
+        data_in : in  std_logic_vector(7 downto 0); -- Dados de entrada de 8 bits
+        data_out : out std_logic_vector(7 downto 0) -- Dados de saída de 8 bits
+    );
+end shift_register_8bit;
+
+architecture Behavioral of shift_register_8bit is
+    signal reg : std_logic_vector(7 downto 0); -- Registrador interno de 8 bits
+begin
+
+    process(clk, reset)
+    begin
+        if reset = '1' then
+            reg <= (others => '0'); -- Reset assíncrono: coloca todos os bits em 0
+        elsif rising_edge(clk) then
+            if load = '1' then
+                reg <= data_in; -- Carrega novo valor quando load é ativado
+            elsif shift_left = '1' then
+                reg <= reg(6 downto 0) & '0'; -- Desloca à esquerda
+            elsif shift_right = '1' then
+                reg <= '0' & reg(7 downto 1); -- Desloca à direita
+            end if;
+        end if;
+    end process;
+
+    data_out <= reg; -- Saída é o valor do registrador
+
+end Behavioral;
